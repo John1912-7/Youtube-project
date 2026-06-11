@@ -4,163 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Youtube-project | Translate YouTube subtitles</title>
-    <meta
-      name="description"
-      content="Paste a YouTube link and get translated subtitles, a short summary, and downloadable SRT or VTT files."
-    />
-    <meta property="og:title" content="Youtube-project" />
-    <meta
-      property="og:description"
-      content="A minimal YouTube subtitle translation and summary tool for creators."
-    />
-    <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="Paste a YouTube link and get translated subtitles, a short summary, and downloadable SRT or VTT files." />
+    <style>
+      :root{--bg:#f7f5ef;--surface:#fff;--ink:#171717;--muted:#666b73;--line:#dfddd4;--brand:#145c50;--brand-strong:#0c453b;--accent:#e65f3c;--sky:#d8ecff;--sun:#ffe28a;--soft:#fff0e9;--shadow:0 22px 60px rgba(24,27,31,.09)}*{box-sizing:border-box}body{margin:0;min-width:320px;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}button,input{font:inherit}a{color:inherit;text-decoration:none}.shell{width:min(1180px,calc(100% - 32px));margin:0 auto;padding:22px 0 36px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0 26px}.brand{display:inline-flex;align-items:center;gap:10px;font-weight:760}.mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--accent) 0 48%,transparent 48% 100%),linear-gradient(135deg,var(--brand) 0 100%)}.nav{display:flex;gap:8px}.nav a{border-radius:8px;color:var(--muted);font-size:14px;padding:8px 10px}.workspace{display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);gap:28px;align-items:center;padding:20px 0 22px}.eyebrow{margin:0 0 10px;color:var(--brand);font-size:13px;font-weight:780;text-transform:uppercase}h1,h2,p{margin-top:0}h1{max-width:760px;margin-bottom:18px;font-size:clamp(40px,5vw,66px);line-height:1}.lede{max-width:600px;margin-bottom:0;color:var(--muted);font-size:18px}.card{border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:var(--shadow)}.tool{min-width:0;padding:18px}.label,legend{display:block;margin-bottom:8px;color:var(--muted);font-size:13px;font-weight:720}.url-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}input[type=url]{width:100%;min-width:0;min-height:48px;border:1px solid var(--line);border-radius:8px;background:#fdfcf8;color:var(--ink);outline:none;padding:0 14px}input[type=url]:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(20,92,80,.14)}button{min-height:48px;border:0;border-radius:8px;background:var(--brand);color:white;cursor:pointer;font-weight:760;padding:0 18px}button:hover{background:var(--brand-strong)}.control-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}fieldset{min-width:0;margin:0;border:0;padding:0}.segmented,.pills{display:flex;min-height:44px;gap:6px}.segmented label{flex:1;min-width:0}.segmented input{position:absolute;inline-size:1px;block-size:1px;opacity:0}.segmented span,.pills span{display:flex;min-height:44px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:#fdfcf8;color:var(--muted);font-size:14px;font-weight:720;padding:0 10px;text-align:center}.segmented input:checked+span{border-color:var(--brand);background:#e7f4ee;color:var(--brand-strong)}.pills{flex-wrap:wrap}.pills span{flex:1 1 76px}.pills span:nth-child(1){background:var(--sky);color:#174260}.pills span:nth-child(2){background:var(--sun);color:#5b4300}.pills span:nth-child(3){background:var(--soft);color:#88351f}.status{min-height:22px;margin:14px 0 0;color:var(--muted);font-size:14px}.status.ok{color:var(--brand)}.status.err{color:#b42318}.result{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(340px,.75fr);gap:22px;align-items:start;padding:10px 0 26px}.video{overflow:hidden;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px;background:#111;box-shadow:var(--shadow)}iframe{display:block;width:100%;height:100%;border:0}.meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:10px 2px 0;color:var(--muted);font-size:13px}.note{color:var(--accent);font-weight:720}.output{min-width:0;padding:18px}.heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}.heading h2{margin:0;font-size:17px}.heading span{border-radius:8px;background:var(--soft);color:var(--accent);font-size:12px;font-weight:800;padding:5px 8px}.summary{border-bottom:1px solid var(--line);padding-bottom:16px}.summary p{margin-bottom:0;color:var(--muted)}.subtitle{padding-top:16px}.subtitle ol{display:grid;gap:8px;margin:0;padding:0;list-style:none}.subtitle li{display:grid;grid-template-columns:82px minmax(0,1fr);gap:10px;border:1px solid var(--line);border-radius:8px;background:#fdfcf8;padding:10px}.subtitle time{color:var(--brand);font-size:12px;font-variant-numeric:tabular-nums;font-weight:800}.subtitle span{color:#3c4148;font-size:14px}.downloads,.pricing-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.secondary{border:1px solid var(--line);background:#fdfcf8;color:var(--ink)}.pricing{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px;align-items:center;margin-top:4px;padding:18px}.pricing h2{margin-bottom:0;font-size:24px}.pricing-options{grid-template-columns:repeat(3,1fr);margin-top:0}.pricing-options div{border:1px solid var(--line);border-radius:8px;background:#fdfcf8;padding:12px}.pricing-options strong,.pricing-options span{display:block}.pricing-options span{color:var(--muted);font-size:13px}@media(max-width:920px){.workspace,.result,.pricing{grid-template-columns:1fr}.workspace{align-items:stretch}}@media(max-width:640px){.shell{width:94vw;max-width:368px;padding-top:12px}.nav{display:none}.workspace{gap:18px;padding-top:14px}h1{font-size:36px;overflow-wrap:break-word}.lede{font-size:16px}.url-row,.control-grid,.downloads,.pricing-options{grid-template-columns:1fr}.segmented,.pills{display:grid;grid-template-columns:1fr}.subtitle li{grid-template-columns:1fr}}
+    </style>
   </head>
   <body>
-    <main class="page-shell">
-      <header class="topbar" aria-label="Site header">
-        <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>Youtube-project</span>
-        </a>
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#workspace">Workspace</a>
-          <a href="#pricing">Pricing</a>
-        </nav>
-      </header>
-
+    <main class="shell">
+      <header class="topbar"><a class="brand" href="/"><span class="mark"></span><span>Youtube-project</span></a><nav class="nav"><a href="#workspace">Workspace</a><a href="#pricing">Pricing</a></nav></header>
       <section class="workspace" id="workspace">
-        <div class="workspace-copy">
-          <p class="eyebrow">Translate Every Video on YouTube</p>
-          <h1>Turn YouTube videos into translated subtitles and summaries.</h1>
-          <p class="lede">
-            Paste a YouTube link, choose a target language, preview the video, and prepare subtitle files for your audience.
-          </p>
-        </div>
-
-        <form class="tool-panel" id="translate-form">
-          <label class="field-label" for="youtube-url">YouTube link</label>
-          <div class="url-row">
-            <input
-              id="youtube-url"
-              name="youtube-url"
-              type="url"
-              inputmode="url"
-              autocomplete="url"
-              placeholder="https://www.youtube.com/watch?v=..."
-              value="https://www.youtube.com/watch?v=jNQXAC9IVRw"
-              required
-            />
-            <button type="submit">Preview</button>
-          </div>
-
-          <div class="control-grid" aria-label="Translation options">
-            <fieldset>
-              <legend>Target</legend>
-              <div class="segmented" role="radiogroup" aria-label="Target language">
-                <label>
-                  <input type="radio" name="language" value="ru" checked />
-                  <span>Russian</span>
-                </label>
-                <label>
-                  <input type="radio" name="language" value="es" />
-                  <span>Spanish</span>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset>
-              <legend>Output</legend>
-              <div class="output-pills" aria-label="Output formats">
-                <span>SRT</span>
-                <span>VTT</span>
-                <span>Summary</span>
-              </div>
-            </fieldset>
-          </div>
-
-          <p class="status" id="status" role="status">Ready</p>
-        </form>
+        <div><p class="eyebrow">Translate Every Video on YouTube</p><h1>Turn YouTube videos into translated subtitles and summaries.</h1><p class="lede">Paste a YouTube link, choose a target language, preview the video, and prepare subtitle files for your audience.</p></div>
+        <form class="card tool" id="translate-form"><label class="label" for="youtube-url">YouTube link</label><div class="url-row"><input id="youtube-url" type="url" value="https://www.youtube.com/watch?v=jNQXAC9IVRw" required /><button type="submit">Preview</button></div><div class="control-grid"><fieldset><legend>Target</legend><div class="segmented"><label><input type="radio" name="language" value="ru" checked /><span>Russian</span></label><label><input type="radio" name="language" value="es" /><span>Spanish</span></label></div></fieldset><fieldset><legend>Output</legend><div class="pills"><span>SRT</span><span>VTT</span><span>Summary</span></div></fieldset></div><p class="status" id="status">Ready</p></form>
       </section>
-
-      <section class="result-layout" aria-label="Preview result">
-        <div class="video-surface">
-          <div class="video-frame" id="video-frame">
-            <iframe
-              id="video-preview"
-              src="https://www.youtube.com/embed/jNQXAC9IVRw"
-              title="YouTube video preview"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <div class="video-meta">
-            <span id="video-id-label">Video ID: jNQXAC9IVRw</span>
-            <span class="quality-note">Captions-first MVP</span>
-          </div>
-        </div>
-
-        <aside class="output-panel" aria-label="Generated output">
-          <div class="summary-block">
-            <div class="panel-heading">
-              <h2>Summary</h2>
-              <span id="language-label">RU</span>
-            </div>
-            <p id="summary-text">
-              This demo prepares a short creator-friendly summary from the available transcript. The production version will use real YouTube captions when they exist.
-            </p>
-          </div>
-
-          <div class="subtitle-block">
-            <div class="panel-heading">
-              <h2>Subtitles</h2>
-              <span>Preview</span>
-            </div>
-            <ol class="subtitle-list" id="subtitle-list">
-              <li>
-                <time>00:00:01</time>
-                <span>Translated subtitle line will appear here.</span>
-              </li>
-              <li>
-                <time>00:00:05</time>
-                <span>Each segment keeps timing for SRT and VTT export.</span>
-              </li>
-              <li>
-                <time>00:00:09</time>
-                <span>The MVP starts with available YouTube captions.</span>
-              </li>
-            </ol>
-          </div>
-
-          <div class="download-row">
-            <button class="secondary-button" type="button" id="download-srt">Download SRT</button>
-            <button class="secondary-button" type="button" id="download-vtt">Download VTT</button>
-          </div>
-        </aside>
-      </section>
-
-      <section class="pricing-strip" id="pricing" aria-label="Pricing preview">
-        <div>
-          <p class="eyebrow">Launch offer</p>
-          <h2>Free preview, paid exports later.</h2>
-        </div>
-        <div class="price-options">
-          <div>
-            <strong>Free</strong>
-            <span>Limited captions preview</span>
-          </div>
-          <div>
-            <strong>$5/video</strong>
-            <span>Export subtitles and summary</span>
-          </div>
-          <div>
-            <strong>$19/mo</strong>
-            <span>Creator subscription draft</span>
-          </div>
-        </div>
-      </section>
+      <section class="result"><div><div class="video"><iframe id="video-preview" src="https://www.youtube.com/embed/jNQXAC9IVRw" title="YouTube video preview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="meta"><span id="video-id-label">Video ID: jNQXAC9IVRw</span><span class="note">Captions-first MVP</span></div></div><aside class="card output"><div class="summary"><div class="heading"><h2>Summary</h2><span id="language-label">RU</span></div><p id="summary-text"></p></div><div class="subtitle"><div class="heading"><h2>Subtitles</h2><span>Preview</span></div><ol id="subtitle-list"></ol></div><div class="downloads"><button class="secondary" type="button" id="download-srt">Download SRT</button><button class="secondary" type="button" id="download-vtt">Download VTT</button></div></aside></section>
+      <section class="card pricing" id="pricing"><div><p class="eyebrow">Launch offer</p><h2>Free preview, paid exports later.</h2></div><div class="pricing-options"><div><strong>Free</strong><span>Limited captions preview</span></div><div><strong>$5/video</strong><span>Export subtitles and summary</span></div><div><strong>$19/mo</strong><span>Creator subscription draft</span></div></div></section>
     </main>
-
-    <script src="app.js"></script>
+    <script>
+      const form=document.querySelector('#translate-form'),urlInput=document.querySelector('#youtube-url'),statusEl=document.querySelector('#status'),iframe=document.querySelector('#video-preview'),videoIdLabel=document.querySelector('#video-id-label'),languageLabel=document.querySelector('#language-label'),summaryText=document.querySelector('#summary-text'),subtitleList=document.querySelector('#subtitle-list'),downloadSrt=document.querySelector('#download-srt'),downloadVtt=document.querySelector('#download-vtt');
+      const copy={ru:{label:'RU',summary:'Короткое summary будет собрано из доступных YouTube captions. В MVP мы сохраняем главную мысль видео и готовим текст для быстрого просмотра creator-командой.',subtitles:[['00:00:01','Переведенная строка субтитров появится здесь.'],['00:00:05','Каждый сегмент сохраняет тайминг для экспорта SRT и VTT.'],['00:00:09','Первая версия работает с доступными YouTube captions.']]},es:{label:'ES',summary:'El resumen se creara a partir de los captions disponibles de YouTube. El MVP guarda la idea principal del video y prepara el texto para revisar rapido.',subtitles:[['00:00:01','La linea traducida de subtitulos aparecera aqui.'],['00:00:05','Cada segmento mantiene el tiempo para exportar SRT y VTT.'],['00:00:09','La primera version usa captions disponibles de YouTube.']]}};
+      let currentVideoId='jNQXAC9IVRw',currentLanguage='ru';
+      function extractYouTubeId(value){const trimmed=value.trim();if(/^[a-zA-Z0-9_-]{11}$/.test(trimmed))return trimmed;try{const url=new URL(trimmed),host=url.hostname.replace(/^www\./,'');if(host==='youtu.be'){const id=url.pathname.split('/').filter(Boolean)[0];return /^[a-zA-Z0-9_-]{11}$/.test(id)?id:null}if(host==='youtube.com'||host==='m.youtube.com'){if(url.pathname==='/watch'){const id=url.searchParams.get('v');return /^[a-zA-Z0-9_-]{11}$/.test(id||'')?id:null}const parts=url.pathname.split('/').filter(Boolean),marker=['embed','shorts','live'].find(part=>parts[0]===part);if(marker&&/^[a-zA-Z0-9_-]{11}$/.test(parts[1]||''))return parts[1]}}catch{return null}return null}
+      function setStatus(message,state=''){statusEl.textContent=message;statusEl.className=state?`status ${state}`:'status'}
+      function renderOutput(){const selected=document.querySelector('input[name="language"]:checked');currentLanguage=selected?selected.value:'ru';const active=copy[currentLanguage];languageLabel.textContent=active.label;summaryText.textContent=active.summary;subtitleList.innerHTML=active.subtitles.map(([time,text])=>`<li><time>${time}</time><span>${text}</span></li>`).join('')}
+      function buildSrt(){return copy[currentLanguage].subtitles.map(([time,text],index)=>{const start=`${time},000`,endSeconds=String(Number(time.slice(-2))+3).padStart(2,'0'),end=`${time.slice(0,-2)}${endSeconds},000`;return `${index+1}\n${start} --> ${end}\n${text}`}).join('\n\n')}
+      function buildVtt(){return `WEBVTT\n\n${buildSrt().replaceAll(',','.').replaceAll(/^\d+\n/gm,'')}`}
+      function downloadFile(name,content){const blob=new Blob([content],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=name;document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url)}
+      form.addEventListener('submit',event=>{event.preventDefault();const videoId=extractYouTubeId(urlInput.value);if(!videoId){setStatus('Paste a valid YouTube video link.','err');return}currentVideoId=videoId;iframe.src=`https://www.youtube.com/embed/${videoId}`;videoIdLabel.textContent=`Video ID: ${videoId}`;renderOutput();setStatus('Preview ready. Backend processing comes next.','ok')});
+      document.querySelectorAll('input[name="language"]').forEach(input=>input.addEventListener('change',()=>{renderOutput();setStatus('Language updated.','ok')}));downloadSrt.addEventListener('click',()=>downloadFile(`${currentVideoId}-${currentLanguage}.srt`,buildSrt()));downloadVtt.addEventListener('click',()=>downloadFile(`${currentVideoId}-${currentLanguage}.vtt`,buildVtt()));renderOutput();
+    </script>
   </body>
 </html>

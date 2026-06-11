@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Youtube-project | Translate YouTube subtitles</title>
+    <meta
+      name="description"
+      content="Paste a YouTube link and get translated subtitles, a short summary, and downloadable SRT or VTT files."
+    />
+    <meta property="og:title" content="Youtube-project" />
+    <meta
+      property="og:description"
+      content="A minimal YouTube subtitle translation and summary tool for creators."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar" aria-label="Site header">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Youtube-project</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#workspace">Workspace</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+      </header>
+
+      <section class="workspace" id="workspace">
+        <div class="workspace-copy">
+          <p class="eyebrow">Translate Every Video on YouTube</p>
+          <h1>Turn YouTube videos into translated subtitles and summaries.</h1>
+          <p class="lede">
+            Paste a YouTube link, choose a target language, preview the video, and prepare subtitle files for your audience.
+          </p>
+        </div>
+
+        <form class="tool-panel" id="translate-form">
+          <label class="field-label" for="youtube-url">YouTube link</label>
+          <div class="url-row">
+            <input
+              id="youtube-url"
+              name="youtube-url"
+              type="url"
+              inputmode="url"
+              autocomplete="url"
+              placeholder="https://www.youtube.com/watch?v=..."
+              value="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+              required
+            />
+            <button type="submit">Preview</button>
+          </div>
+
+          <div class="control-grid" aria-label="Translation options">
+            <fieldset>
+              <legend>Target</legend>
+              <div class="segmented" role="radiogroup" aria-label="Target language">
+                <label>
+                  <input type="radio" name="language" value="ru" checked />
+                  <span>Russian</span>
+                </label>
+                <label>
+                  <input type="radio" name="language" value="es" />
+                  <span>Spanish</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Output</legend>
+              <div class="output-pills" aria-label="Output formats">
+                <span>SRT</span>
+                <span>VTT</span>
+                <span>Summary</span>
+              </div>
+            </fieldset>
+          </div>
+
+          <p class="status" id="status" role="status">Ready</p>
+        </form>
+      </section>
+
+      <section class="result-layout" aria-label="Preview result">
+        <div class="video-surface">
+          <div class="video-frame" id="video-frame">
+            <iframe
+              id="video-preview"
+              src="https://www.youtube.com/embed/jNQXAC9IVRw"
+              title="YouTube video preview"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-meta">
+            <span id="video-id-label">Video ID: jNQXAC9IVRw</span>
+            <span class="quality-note">Captions-first MVP</span>
+          </div>
+        </div>
+
+        <aside class="output-panel" aria-label="Generated output">
+          <div class="summary-block">
+            <div class="panel-heading">
+              <h2>Summary</h2>
+              <span id="language-label">RU</span>
+            </div>
+            <p id="summary-text">
+              This demo prepares a short creator-friendly summary from the available transcript. The production version will use real YouTube captions when they exist.
+            </p>
+          </div>
+
+          <div class="subtitle-block">
+            <div class="panel-heading">
+              <h2>Subtitles</h2>
+              <span>Preview</span>
+            </div>
+            <ol class="subtitle-list" id="subtitle-list">
+              <li>
+                <time>00:00:01</time>
+                <span>Translated subtitle line will appear here.</span>
+              </li>
+              <li>
+                <time>00:00:05</time>
+                <span>Each segment keeps timing for SRT and VTT export.</span>
+              </li>
+              <li>
+                <time>00:00:09</time>
+                <span>The MVP starts with available YouTube captions.</span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="download-row">
+            <button class="secondary-button" type="button" id="download-srt">Download SRT</button>
+            <button class="secondary-button" type="button" id="download-vtt">Download VTT</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="pricing-strip" id="pricing" aria-label="Pricing preview">
+        <div>
+          <p class="eyebrow">Launch offer</p>
+          <h2>Free preview, paid exports later.</h2>
+        </div>
+        <div class="price-options">
+          <div>
+            <strong>Free</strong>
+            <span>Limited captions preview</span>
+          </div>
+          <div>
+            <strong>$5/video</strong>
+            <span>Export subtitles and summary</span>
+          </div>
+          <div>
+            <strong>$19/mo</strong>
+            <span>Creator subscription draft</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

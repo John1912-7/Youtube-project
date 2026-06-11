@@ -9,6 +9,17 @@ const subtitleList = document.querySelector("#subtitle-list");
 const downloadSrt = document.querySelector("#download-srt");
 const downloadVtt = document.querySelector("#download-vtt");
 
+const apiFromUrl = new URLSearchParams(window.location.search).get("api");
+if (apiFromUrl) {
+  localStorage.setItem("youtubeProjectApiUrl", apiFromUrl.replace(/\/$/, ""));
+}
+
+const API_BASE_URL = (
+  apiFromUrl ||
+  localStorage.getItem("youtubeProjectApiUrl") ||
+  ""
+).replace(/\/$/, "");
+
 const copy = {
   ru: {
     label: "RU",
@@ -34,6 +45,12 @@ const copy = {
 
 let currentVideoId = "jNQXAC9IVRw";
 let currentLanguage = "ru";
+let currentSegments = copy.ru.subtitles.map(([time, text]) => ({
+  time,
+  text,
+  startMs: parseDisplayTime(time),
+  durationMs: 3000
+}));
 
 function extractYouTubeId(value) {
   const trimmed = value.trim();
@@ -82,16 +99,13 @@ function renderOutput() {
 
   languageLabel.textContent = activeCopy.label;
   summaryText.textContent = activeCopy.summary;
-  subtitleList.innerHTML = activeCopy.subtitles
-    .map(
-      ([time, text]) => `
-        <li>
-          <time>${time}</time>
-          <span>${text}</span>
-        </li>
-      `
-    )
-    .join("");
+  currentSegments = activeCopy.subtitles.map(([time, text]) => ({
+    time,
+    text,
+    startMs: parseDisplayTime(time),
+    durationMs: 3000
+  }));
+  renderSegments(currentSegments);
 }
 
 function updateVideo(videoId) {
@@ -101,13 +115,11 @@ function updateVideo(videoId) {
 }
 
 function buildSrt() {
-  const lines = copy[currentLanguage].subtitles;
-  return lines
-    .map(([time, text], index) => {
-      const start = `${time},000`;
-      const endSeconds = String(Number(time.slice(-2)) + 3).padStart(2, "0");
-      const end = `${time.slice(0, -2)}${endSeconds},000`;
-      return `${index + 1}\n${start} --> ${end}\n${text}`;
+  return currentSegments
+    .map((segment, index) => {
+      const start = formatSrtTime(segment.startMs);
+      const end = formatSrtTime(segment.startMs + (segment.durationMs || 3000));
+      return `${index + 1}\n${start} --> ${end}\n${segment.text}`;
     })
     .join("\n\n");
 }
@@ -141,8 +153,7 @@ form.addEventListener("submit", (event) => {
   }
 
   updateVideo(videoId);
-  renderOutput();
-  setStatus("Preview ready. Backend processing comes next.", "success");
+  processVideo();
 });
 
 document.querySelectorAll('input[name="language"]').forEach((input) => {
@@ -161,3 +172,86 @@ downloadVtt.addEventListener("click", () => {
 });
 
 renderOutput();
+
+async function processVideo() {
+  if (!API_BASE_URL) {
+    renderOutput();
+    setStatus(
+      "Backend API is not connected yet. Deploy the Cloudflare Worker, then open this site with ?api=YOUR_WORKER_URL.",
+      "error"
+    );
+    return;
+  }
+
+  setStatus("Getting captions and translating...", "");
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/process`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        url: urlInput.value,
+        target: currentLanguage
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || data.error) {
+      throw new Error(data.error || "Translation failed.");
+    }
+
+    currentSegments = data.segments.map((segment) => ({
+      ...segment,
+      time: formatDisplayTime(segment.startMs)
+    }));
+
+    languageLabel.textContent = currentLanguage.toUpperCase();
+    summaryText.textContent = data.summary;
+    renderSegments(currentSegments);
+    setStatus(
+      `Translated ${data.usedSegments} of ${data.totalSegments} caption segments.`,
+      "success"
+    );
+  } catch (error) {
+    renderOutput();
+    setStatus(error.message || "Could not translate this video.", "error");
+  }
+}
+
+function renderSegments(segments) {
+  subtitleList.innerHTML = segments
+    .map(
+      ({ time, text }) => `
+        <li>
+          <time>${time}</time>
+          <span>${text}</span>
+        </li>
+      `
+    )
+    .join("");
+}
+
+function parseDisplayTime(time) {
+  const [hours, minutes, seconds] = time.split(":").map(Number);
+  return ((hours * 60 + minutes) * 60 + seconds) * 1000;
+}
+
+function formatDisplayTime(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+function formatSrtTime(milliseconds) {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
+  const ms = String(milliseconds % 1000).padStart(3, "0");
+  return `${hours}:${minutes}:${seconds},${ms}`;
+}

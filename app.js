@@ -17,7 +17,7 @@ if (apiFromUrl) {
 const API_BASE_URL = (
   apiFromUrl ||
   localStorage.getItem("youtubeProjectApiUrl") ||
-  ""
+  "https://youtube-project-api.john20040703.workers.dev"
 ).replace(/\/$/, "");
 
 const copy = {
